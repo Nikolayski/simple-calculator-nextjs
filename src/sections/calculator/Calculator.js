@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ThemeContext, useTheme } from "styled-components";
 import { StyledLargeButton, StyledRegularButton } from "../../components/Buttons/elements";
+import ButtonsContainer from "../../components/Containers/ButtonsContainer";
 import { CalculatorContainer, CalculatorDisplay } from "./elements";
 
 
@@ -11,9 +11,6 @@ const Calculator = props => {
   const [state, SetState] = useState('0');
   const [currSymbol, SetCurrSymbol] = useState('');
   const [current, SetCurrent] = useState(0);
-
-  const theme = useTheme();
-  console.log(theme)
 
  const clickHandler = e => {
     if(digits.includes(e.target.innerText)){
@@ -63,17 +60,14 @@ const Calculator = props => {
 
     return (
         <CalculatorContainer>
-          <article style={{display: 'flex', justifyContent: 'space-between', fontSize:'30px', marginBottom: '20px'}}>
-            <p style={{fontSize: '40px'}}>calc</p>
-          </article>
           <CalculatorDisplay {...props}>{state}</CalculatorDisplay>
-          <article style={{background: 'hsl(223, 31%, 20%)', display: 'flex', flexWrap: 'wrap', marginTop: '30px', justifyContent:'space-around', padding:'35px 20px 20px 20px', borderRadius: '12px'}}>
+           <ButtonsContainer>
             {regularButtons.map(x=> (
               <StyledRegularButton onClick={clickHandler} {...props}>{x}</StyledRegularButton>
             ))}
             <StyledLargeButton onClick={clickHandler} background="red">RESET</StyledLargeButton>
             <StyledLargeButton onClick={clickHandler}>=</StyledLargeButton>
-          </article>
+            </ButtonsContainer>
        </CalculatorContainer>
       );
 }
